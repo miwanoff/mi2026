@@ -50,3 +50,5 @@ foreach ($languages as $key => $value) {
 	}
 }
 echo "\n\n";
+
+print_r($languages);
