@@ -45,45 +45,95 @@ foreach ($countries as $country) {
     echo ";\n";
 }
 
-function cmp($a, $b) 
+function cmp($a, $b)
 { // функция, определяющая способ сортировки (по названию столицы)
-  if ($a["capital"] < $b["capital"]) return -1;
-  elseif ($a["capital"] == $b["capital"]) return 0;
-  else return 1;
+    if ($a["capital"] < $b["capital"]) {
+        return -1;
+    } elseif ($a["capital"] == $b["capital"]) {
+        return 0;
+    } else {
+        return 1;
+    }
+
 }
 
 function cmp1($a, $b)
 { // функция, определяющая способ сортировки (по населению)
-  if ($a["population"]["2000"] < $b["population"]["2000"]) return -1;
-  elseif ($a["population"]["2000"] == $b["population"]["2000"]) return 0;
-  else return 1;
- }
+    if ($a["population"]["2000"] < $b["population"]["2000"]) {
+        return -1;
+    } elseif ($a["population"]["2000"] == $b["population"]["2000"]) {
+        return 0;
+    } else {
+        return 1;
+    }
 
- function cmp2($a,$b)
-{ // функция, определяющая способ сортировки (по сумме населения за 2000 и за 2010 годы)
-  if ($a["population"]["2000"] + $a["population"]["2010"]< $b["population"]["2000"] + $b["population"]["2010"]) return -1;
-  elseif ($a["population"]["2000"] + $a["population"]["2010"]==$b["population"]["2000"] + $b["population"]["2010"]) return 0;
-  else return 1;
 }
 
-uasort($countries,"cmp");
+function cmp2($a, $b)
+{ // функция, определяющая способ сортировки (по сумме населения за 2000 и за 2010 годы)
+    if ($a["population"]["2000"] + $a["population"]["2010"] < $b["population"]["2000"] + $b["population"]["2010"]) {
+        return -1;
+    } elseif ($a["population"]["2000"] + $a["population"]["2010"] == $b["population"]["2000"] + $b["population"]["2010"]) {
+        return 0;
+    } else {
+        return 1;
+    }
 
-function print_country($country,$key_country,$data)
-{ 
-  static $i=1; // статическая глобальная переменная-счетчик
-  echo $data.$i." ";
-   foreach ($country as $key => $value) {
-    if (!is_array($value))
-      echo "$key:$value\t";
-      else {
-        echo "$key: ";
-        foreach ($value as $k => $v)
-          echo "[{$k} год. - $v] ";
+}
+
+uasort($countries, "cmp");
+
+function print_country($country, $key_country, $data)
+{
+    static $i = 1; // статическая глобальная переменная-счетчик
+    echo $data . $i . " ";
+    foreach ($country as $key => $value) {
+        if (! is_array($value)) {
+            echo "$key:$value\t";
+        } else {
+            echo "$key: ";
+            foreach ($value as $k => $v) {
+                echo "[{$k} год. - $v] ";
+            }
+
         }
     }
-    echo "\n"; 
+    echo "\n";
     $i++;
- }
+}
+
+function search($countries, $data)
+{
+    $result = [];
+    foreach ($countries as $country_number => $country) {
+        foreach ($country as $key => $value) {
+            if (! is_array($value)) {
+                if (stristr($value, $data)) {
+                    $result[] = $country_number;
+                }
+            } else {
+                foreach ($value as $k => $v) {
+                    if (stristr($v, $data) || strstr($k, $data)) {
+                        $result[] = $country_number;
+                    }
+                }
+            }
+        }
+    }
+    return array_unique($result);
+}
 
 echo "№  Назва\tСтолиця\t\tПлоща\t\tНаселення\n";
-array_walk($countries,"print_country","№");
+array_walk($countries, "print_country", "№");
+
+print_r(search($countries, "land"));
+
+$seach_result = array_flip(search($countries, "land"));
+
+print_r($seach_result);
+
+$countries_seach_result = array_intersect_key($countries, $seach_result);
+
+print_r($countries_seach_result);
+
+array_walk($countries_seach_result, "print_country", "№");
