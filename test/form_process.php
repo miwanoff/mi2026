@@ -5,15 +5,19 @@
     echo "Your City is:" . $_POST["City"] . "<br/>";
     echo "Your State is:" . $_POST["State"] . "<br/>";
     echo "<br/>";
-    echo "Your Message is:" . $_POST["Message"];
+    echo "Your Message is:" . $_POST["Message"]; 
     
-    print_r ($_POST['in']);
-    echo count($_POST['in']);
-    for ($i = 0; $i < count($_POST['in']); $i++) {
-        echo $_POST['in'][$i] . '"<br/>';
-    }
+    print_r($_POST);
+    // echo count($_POST['in']);
+    // for ($i = 0; $i < count($_POST['in']); $i++) {
+    //     echo $_POST['in'][$i] . '"<br/>';
+    // }
 
     }
+
+    $data       = ['one' => 1, 'two' => 2, 'three' => 33]; 
+    $dataString = serialize($data);
+    print_r($dataString);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,7 @@
 </head>
 
 <body>
-    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
         First Name:<br />
         <input type="text" name="FName" /><br />
         Last Name:<br />
@@ -37,10 +41,17 @@
         Message:<br />
         <textarea name="Message" cols="30" rows="5">
       </textarea><br />
-        <input type="submit" name="submit" value="Submit Data" /><br>
         <input type="text" name="in[]" value="1">
         <input type="text" name="in[]" value="2">
-        <input type="text" name="in[]" value="3">
+        <input type="text" name="in[]" value="3"><br />
+        <input type="hidden" name="result" value="<?= $dataString ?>"><br>
+        <select name="course" size="1">
+            <option value="ASP.NET">ASP.NET</option>
+            <option value="PHP">PHP</option>
+            <option value="Ruby">RUBY</option>
+            <option value="Python">Python</option>
+        </select>
+        <input type="submit" name="submit" value="Submit Data" /><br>
     </form>
 </body>
 
