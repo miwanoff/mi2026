@@ -1,11 +1,31 @@
 <?php
-require "db.php";
+    require "db.php"; 
 
-$country = $_GET["country"];
-include "header.php";
+    $country = $_GET["country"];
+    include "header.php";
 ?>
 <p>Ви обрали:</p>
 
-<h2><?= $country ?></h2>
+<h2><?php echo $country ?></h2>
+
 <?php
-include "footer.php" ;
+    $tours_keys = [];
+    foreach ($tours as $key => $tour) {
+    if ($tour['country'] == $country) {
+        $tours_keys[] = $key; // "0" => 3, "1" => 6 (for Mexico)
+    }
+    }
+
+    for ($i = 0; $i < count($tours); $i++) {
+    if (in_array($i, $tours_keys)) { 
+        // echo "$i <br>";
+        echo "<h3>name {$tours[$i]['name']}  </h3>";
+        echo "<p>stars {$tours[$i]['stars']}  </p>";
+        echo "<p>price {$tours[$i]['price']}  </p>";
+        
+        echo "<p>transport {$tours[$i]['transport']}  </p>"; 
+        // echo $tours[$i]['name']. "<br>" ;
+    }
+    }
+
+include "footer.php";
