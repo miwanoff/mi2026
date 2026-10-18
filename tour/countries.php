@@ -1,8 +1,11 @@
 <?php
-$country = "UK";
-$redir = "country.php";
+$country = "UK"; 
+$redir   = "country.php";
 if (isset($_POST['formSubmit'])) {
-    $country = $_POST['formCountry'];
+    $country   = $_POST['formCountry']; 
+    $transport = $_POST['transport']; 
+    $stars     = $_POST['stars']; 
+    $price     = $_POST["price"]; 
     // $redir = "US.html";
     // switch ($v) {
     //     case "US":$redir = "US.html";
@@ -18,6 +21,6 @@ if (isset($_POST['formSubmit'])) {
     //     default:echo ("Error!");exit();
     //         break;
     // }
-    header("Location: $redir?country=$country");
+    header("Location: $redir?country=$country&transport=$transport&stars=$stars&price=$price");
     exit();
 }

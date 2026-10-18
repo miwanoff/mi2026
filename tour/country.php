@@ -2,12 +2,18 @@
     require "db.php"; 
 
     $country = $_GET["country"];
+    $transport = $_GET["transport"];
+    $stars = $_GET["stars"];
+    $price = $_GET["price"];
+    
     include "header.php";
 ?>
 <p>Ви обрали:</p>
 
 <h2><?php echo $country ?></h2>
-
+<p>Транспорт: <?= $transport ?></p>
+<p>Зірки: <?= $stars ?></p>
+<p>Макс. ціна: <?= $price ?></p>
 <?php
     $tours_keys = [];
     foreach ($tours as $key => $tour) {
