@@ -6,6 +6,7 @@ $tours = [
         'stars' => 4,
         'price' => 750,
         'transport' => "plane",
+        'img' => "photo-1501785888041-af3ef285b470",
     ],
     [
         'name' => 'Dark Woods',
@@ -13,6 +14,7 @@ $tours = [
         'stars' => 5,
         'price' => 850,
         'transport' => "train",
+        'img' => "photo-1469474968028-56623f02e42e",
     ],
     [
         'name' => 'Foggy Forest',
@@ -20,6 +22,7 @@ $tours = [
         'stars' => 3,
         'price' => 500,
         'transport' => "bus",
+        'img' => "photo-1441974231531-c6227db76b6e",
     ],
     [
         'name' => 'Hot Sea',
@@ -27,6 +30,7 @@ $tours = [
         'stars' => 2,
         'price' => 200,
         'transport' => "plane",
+        'img' => "photo-1507525428034-b723cf961d3e",
     ],
     [
         'name' => 'Stanning Mountains',
@@ -34,6 +38,7 @@ $tours = [
         'stars' => 4,
         'price' => 750,
         'transport' => "plane",
+        'img' => "photo-1464822759023-fed622ff2c3b",
     ],
     [
         'name' => 'Beautiful Walley',
@@ -41,6 +46,7 @@ $tours = [
         'stars' => 1,
         'price' => 100,
         'transport' => "bus",
+        'img' => "photo-1500530855697-b586d89ba3ee",
     ],
     [
         'name' => 'Yellow Desert',
@@ -48,6 +54,7 @@ $tours = [
         'stars' => 1,
         'price' => 100,
         'transport' => "bus",
+        'img' => "photo-1509316785289-025f5b846b35",
     ],
     [
         'name' => 'Cozy Bay',
@@ -55,6 +62,7 @@ $tours = [
         'stars' => 3,
         'price' => 550,
         'transport' => "train",
+        'img' => "photo-1505142468610-359e7d316be0",
     ],
     [
         'name' => 'Huge Forest',
@@ -62,5 +70,6 @@ $tours = [
         'stars' => 3,
         'price' => 600,
         'transport' => "bus",
+        'img' => "photo-1448375240586-ded5e2480120",
     ],
 ];

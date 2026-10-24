@@ -1,50 +1,41 @@
-# TourKit — Bug Fix Plan
+# TourKit — Design Integration Plan
+
+## Design source
+`references/design-reference.html` (do not modify). Single-page "Обрій" travel site with CSS design tokens, responsive layout, card/grid UI. Tour data in that file is fictional and must NOT be imported — keep `db.php`.
 
 ## Goal
-Make the tour search flow actually filter results by all selected criteria and fix data/UX inconsistencies.
+Apply the Claude design (tokens, typography, layout, cards, responsive grid) to the existing PHP templates while preserving search flow and `db.php` data.
 
-## Scope decisions
-- Only functional bugs in the PHP flow; the HTML design reference (`references/design-reference.html`) is out of scope.
-- Stars filter = minimum rating (`stars >= selected`).
-- Price filter = maximum price (`price <= selected`), matching the single range input.
-- Transport exact match after vocabulary unification.
-- No DB migration; data stays in `db.php` array.
+## Constraints
+- No new dependencies, DB, API, or paid services.
+- Keep PHP structure and GET/POST param flow.
+- Do not rewrite project from scratch.
+- Do not edit `references/design-reference.html`.
 
-## Affected files
-- `index.php` — search form
-- `countries.php` — redirect handler
-- `country.php` — results page
-- `db.php` — tour data
-- `header.php` — page title
+## Files to change
+- `css/style.css` — populate with design tokens + component styles extracted from reference (header, search, cards, grid, footer, responsive breakpoints).
+- `header.php` — set lang="uk", title, include `css/style.css`, open `<main>`, top bar markup.
+- `footer.php` — footer markup matching design, close tags, include Bootstrap/JS only if needed.
+- `index.php` — hero + search form restyled with design classes; keep fields country/transport/stars/price and POST to countries.php.
+- `country.php` — results rendered as design cards (name, country, stars, price, transport); keep filters (already implemented).
+- `js/scripts.js` — optional minimal JS (mobile menu toggle). No data.
 
 ## Tasks
+1. Extract `<style>` block from `references/design-reference.html` into `css/style.css`.
+2. Update `header.php`/`footer.php` to design shell markup.
+3. Restyle `index.php` form with design `.search`/`.field` classes; preserve form names.
+4. Restyle `country.php` output as `.card` grid; escape values; keep filters.
+5. Add mobile menu toggle in `js/scripts.js`.
+6. Verify filters still narrow results; test responsive breakpoints.
 
-1. **Fix form submission trigger** (`index.php`): rename button `name=" formSubmit"` → `name="formSubmit"` so `countries.php` redirect fires.
+## Risks
+- Design reference is a JS app; only CSS + static markup reused, no JS data.
+- Some design components (hot tours, admin panel) require data not in db.php — skip or mark out of scope.
+- Transport vocabulary must stay unified (`plane`, not `airplane`).
 
-2. **Unify transport vocabulary** (`db.php`): change `"airplane"` → `"plane"` to match form option values (`bus`/`plane`/`train`).
-
-3. **Normalize data types** (`db.php`): store `stars` and `price` as integers instead of strings for correct comparisons.
-
-4. **Apply all filters** (`country.php`):
-   - Read GET params with null-coalescing defaults (`country=UK`, `transport=`, `stars=1`, `price=1000`).
-   - Cast `$stars`/`$price` to int.
-   - Filter tours where `country` matches, (`transport` empty OR matches), `stars >= $stars`, `price <= $price`.
-   - Show "no results" message when empty.
-   - Escape all output with `htmlspecialchars`.
-
-5. **Page title** (`header.php`): set `<title>TourKit — турагенство</title>`.
-
-6. **Safety**: guard against undefined GET keys; validate `$stars` (1–5) and `$price` (100–1000) ranges, clamp if out of bounds.
-
-## Edge cases
-- Direct access to `country.php` without params → defaults, shows all tours for UK.
-- Invalid transport value → no match (empty result + fallback message).
-- Stars/price out of range → clamped to valid bounds.
-- XSS via GET params → escaped.
-
-## Validation
-- Submit form for each country; verify redirect carries all params.
-- Verify transport filter excludes non-matching tours.
-- Verify stars/price filters narrow results.
-- Empty result shows fallback message.
-- No PHP notices in error log.
+## Fix: results page vertical spacing
+- Symptom: search results page (`country.php`) has too-small top/bottom outer margins.
+- Cause: content wrapped in `<div class="wrap">` with no vertical padding (design uses `section { padding-block: var(--sp-5) 0 }`).
+- Change: wrap results content in `<section class="wrap" style="padding-block: var(--sp-4)">` (or add `.results` class with padding-block: 2.5rem). Keep `.wrap` width constraint.
+- Files: `country.php` only.
+- Validation: visual check top/bottom spacing on desktop/mobile.
