@@ -18,9 +18,10 @@
     </select><br>
     <label for="transpostarsrt">Stars</label>
     <input type="number" name="stars" id="stars" min="1" max="5" value="3"><br>
-    <label for="price">Ціна (між 100 та 1000):</label>
-    <input type="range" id="price" name="price" min="100" max="1000" step="50" class="form-range"><br>
-    <button name=" formSubmit">ОК</button>
+<label for="price">Ціна (між 100 та 1000):</label>
+<input type="range" id="price" name="price" min="100" max="1000" step="50" value="300" class="form-range" oninput="document.getElementById('priceValue').textContent = this.value">
+<span id="priceValue">300</span><br>
+    <button name="formSubmit">ОК</button>
 </form>
 <?php
 include "footer.php";
