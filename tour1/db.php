@@ -70,6 +70,6 @@ $tours = [
         'stars' => 3,
         'price' => 600,
         'transport' => "bus",
-        'img' => "photo-1448375240586-ded5e2480120",
+        'img' => "photo-1501785888041-af3ef285b470",
     ],
 ];

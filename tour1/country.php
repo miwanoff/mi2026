@@ -25,7 +25,7 @@ include "header.php";
     <?php if (empty($results)): ?>
         <div class="empty"><p>На жаль, за обраними критеріями турів не знайдено.</p></div>
     <?php else: ?>
-        <div class="grid">
+        <div class="grid" style="margin-top: var(--sp-3); margin-bottom: var(--sp-3)">
             <?php foreach ($results as $tour): ?>
                 <article class="card">
                     <div class="card__img"><img src="https://images.unsplash.com/<?= htmlspecialchars($tour['img']) ?>?auto=format&fit=crop&w=900&q=72" alt="<?= htmlspecialchars($tour['name']) ?>"></div>
@@ -42,7 +42,7 @@ include "header.php";
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
-    <p><a class="btn btn--ghost btn--sm" href="index.php">Новий пошук</a></p>
+    <p style="margin-top: var(--sp-3)"><a class="btn btn--ghost btn--sm" href="index.php">Новий пошук</a></p>
 </section>
 <?php
 include "footer.php";
