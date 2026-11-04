@@ -44,7 +44,7 @@
 </div>
 <?php require "db.php"; ?>
 <div class="wrap" id="tours" style="margin-top:2rem">
-    <h2>Усі тури</h2>
+    <h2 style="margin-bottom: var(--sp-3)">Усі тури</h2>
     <div class="grid">
         <?php foreach ($tours as $tour): ?>
             <article class="card">
