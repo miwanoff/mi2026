@@ -1,6 +1,7 @@
 <?php
-$a = ["a"=>"aa", "b"=>"bb", "c"=>[array("х"=>"хх")]];
-$st = serialize($a);
+require_once "db.php";
+
+$st = serialize($tours);
 echo $st;
 
 $h = fopen ( 'db.txt' , 'w' ); 
