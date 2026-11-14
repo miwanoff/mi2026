@@ -2,7 +2,7 @@
     require_once "functions.php";
     require_once __DIR__ . '/weather.php'; 
 
-    $weather = getCapitalWeather($countries[0]['capital']);
+$weather = getCapitalWeather($countries[0]['capital']);
 
 if ($weather) {?>
 <h2>Погода у столиці</h2>
